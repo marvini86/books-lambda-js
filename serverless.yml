@@ -1,0 +1,30 @@
+service: book-lambda-js
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-localstack
+
+custom:
+  localstack:
+    stages:
+      # list of stages for which the plugin should be enabled
+      - local
+    host: http://localhost  # optional - LocalStack host to connect to
+    edgePort: 4566  # optional - LocalStack edge port to connect to
+
+functions:
+  app:
+    handler: app.handler
+    events: 
+      - http: 
+          path: /
+          method: GET
+      - http: 
+          path: /
+          method: POST
+      - http: 
+          path: /
+          method: PUT    
